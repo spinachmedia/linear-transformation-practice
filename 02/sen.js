@@ -11,15 +11,32 @@ $(function () {
 
     //学習データ
     var datas = [
+        [1, 2],
+        [1, 4],
+        [1, 6],
+        [1, 12],
+        [1, 16],
         [1, 20],
-        [1, 40],
-        [1, 60]
+//        [1, 21],
+//        [1, 23],
+//        [1, 30],
+//        [1, 46],
+//        [1, 58]
+        
     ];
 
     var dataResults = [
-        154,
-        304,
-        454
+        15,
+        36,
+        45,
+        73,
+        74,
+        82,
+//        84,
+//        98,
+//        95,
+//        121,
+//        130
     ];
 
     //パラメータ、初期値。（重み）
@@ -28,7 +45,7 @@ $(function () {
 
 
     //学習率
-    var alpha = 0.1;
+    var alpha = 0.001;
 
     //学習データ数
     var m = datas.length;
@@ -39,7 +56,7 @@ $(function () {
 
         //学習データの描画
         datas.forEach(function (data, index, array) {
-            two.makeCircle(data[1], dataResults[index], 3);
+            two.makeCircle(data[1], dataResults[index], 1);
         });
 
         //仮説関数の描画
@@ -49,12 +66,9 @@ $(function () {
             for (var i = 0; i < params.length; i++) {
                 result = result + params[i] * x;
             }
-            //            console.log("yyyyy");
-            //            console.log(result);
-            //            
             return result;
         }
-        two.makeLine(0, y(0), 200, y(200));
+        two.makeLine(0, y(0), 600, y(600));
 
         //仮説関数の描画
         two.update();
@@ -101,7 +115,7 @@ $(function () {
             //            console.log("p:" + p + ",d[" + i + "]:" + d[i]);
             //            console.log("d[i][j]:" + d[i][j]);
             var tmp = (h_func(p, d[i]) - dataResults[i]) * d[i][j];
-            console.log(tmp);
+//            console.log(tmp);
             result = result + tmp;
         }
         //        console.log("勾配降下、微分の結果：");
@@ -115,7 +129,7 @@ $(function () {
         var tmp = [];
         for (var j = 0; j < params.length; j++) {
             //            console.log(j + "列目の処理");
-            console.log(params[j] + "-(" + alpha + "* (" + (1 / m) + ") *" + m_cost_func(j, params, datas));
+//            console.log(params[j] + "-(" + alpha + "* (" + (1 / m) + ") *" + m_cost_func(j, params, datas));
             tmp[j] = params[j] - (alpha / m * m_cost_func(j, params, datas));
             tmp[j] = tmp[j].toFixed(6);
         }
@@ -160,7 +174,7 @@ $(function () {
         counter++;
         drawCanvas();
         if (nextFlg) {
-            setTimeout(main, 100);
+            setTimeout(main, 200);
         }
     }
 
